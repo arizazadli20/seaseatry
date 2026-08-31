@@ -133,36 +133,16 @@ export function SnapCarousel({ children, desktopGridClassName, autoAdvance = fal
         })}
       </div>
 
-      {/* Dots Indicator (Mobile/Tablet Only) */}
-      <div className="flex lg:hidden justify-center gap-1.5 mt-2">
-        {React.Children.map(children, (child, index) => {
-          if (React.isValidElement(child) && (child as any).props['data-desktop-only']) return null;
-          return (
-            <button
-              key={index}
-              aria-label={`Go to slide ${index + 1}`}
-              className="w-11 h-11 flex items-center justify-center -mx-2"
-              onClick={() => {
-                handleInteraction();
-                const container = scrollContainerRef.current;
-                const target = container?.querySelector(`[data-index="${index}"]`) as HTMLElement;
-                if (target && container) {
-                  container.scrollTo({
-                    left: target.offsetLeft - container.offsetLeft,
-                    behavior: 'smooth'
-                  });
-                }
-              }}
-            >
-              <div 
-                className={cn(
-                  "h-1.5 rounded-full transition-all duration-300",
-                  activeIndex === index ? "bg-brand-primary w-4" : "bg-gray-300 w-1.5"
-                )}
-              />
-            </button>
-          );
-        })}
+      {/* Continuous Progress Line (Mobile/Tablet Only) */}
+      <div className="flex lg:hidden justify-center px-[9vw] mt-6">
+        <div className="relative w-full h-1 bg-gray-200 rounded-full overflow-hidden">
+          <div 
+            className="absolute top-0 left-0 h-full bg-brand-primary rounded-full transition-all duration-300 ease-out"
+            style={{ 
+              width: `${((activeIndex + 1) / Math.max(1, React.Children.count(children) - (React.Children.toArray(children).some(c => (c as any).props?.['data-desktop-only']) ? 1 : 0))) * 100}%` 
+            }}
+          />
+        </div>
       </div>
     </div>
   );

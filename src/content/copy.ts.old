@@ -72,22 +72,6 @@ export const siteCopy = {
       description: "Nearby traffic gives investigators context. Never blame."
     }
   },
-  problem: {
-    title: "The missing link",
-    description: "Detection is only the beginning. The harder challenge is coordinating a fast, informed response."
-  },
-  response: {
-    title: "Response Statuses",
-    statuses: [
-      { label: "New Incident", color: "text-status-red" },
-      { label: "Under Review", color: "text-status-yellow" },
-      { label: "Cleaning", color: "text-brand-primary" },
-      { label: "Resolved", color: "text-gray-400" }
-    ]
-  },
-  finalCta: {
-    lines: ["See the spill.", "Understand the risk.", "Support the response."]
-  },
   livePlatform: {
     title: "From Satellite Signal to Operational Intelligence",
     label: "Prototype",
