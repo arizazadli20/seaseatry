@@ -42,7 +42,7 @@ function App() {
     <SmoothScroll>
       <div ref={containerRef} className="min-h-screen selection:bg-brand-primary/20 selection:text-brand-primary bg-white">
         <Navigation />
-        <main className="pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0 relative z-10 bg-white">
+        <main className="relative z-10 bg-white">
           <Hero />
           <Problem />
           <Workflow />
