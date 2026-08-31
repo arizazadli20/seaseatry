@@ -5,11 +5,7 @@ export function Workflow() {
   return (
     <section id="workflow" className="py-16 md:py-24 border-b border-gray-200 bg-gray-50/30">
       <div className="container mx-auto px-0 md:px-6">
-        <div className="text-center mb-12 md:mb-20 px-6">
-          <h2 className="text-sm font-mono text-brand-primary tracking-widest uppercase mb-4">
-            {siteCopy.workflow.title}
-          </h2>
-        </div>
+        {/* Removed mono label to keep page clean */}
 
         <div className="max-w-5xl mx-auto relative">
           <SnapCarousel 

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { cn } from './Button'; // Reusing cn utility
+import { cn } from './Button'; 
 
 interface SnapCarouselProps {
   children: React.ReactNode[];
@@ -12,18 +12,30 @@ export function SnapCarousel({ children, desktopGridClassName, autoAdvance = fal
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [userInteracted, setUserInteracted] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-  // Intersection Observer for dots
+  // Intersection Observer for visibility (pause when off-screen)
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    visibilityObserver.observe(container);
+    return () => visibilityObserver.disconnect();
+  }, []);
+
+  // Intersection Observer for active dot
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // Find the most visible entry
         const visibleEntries = entries.filter(e => e.isIntersecting);
         if (visibleEntries.length > 0) {
-          // Sort by intersection ratio to find the one most in view
           visibleEntries.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
           const activeElement = visibleEntries[0].target as HTMLElement;
           const index = parseInt(activeElement.dataset.index || '0', 10);
@@ -32,7 +44,7 @@ export function SnapCarousel({ children, desktopGridClassName, autoAdvance = fal
       },
       {
         root: container,
-        threshold: 0.5,
+        threshold: 0.6,
       }
     );
 
@@ -42,11 +54,10 @@ export function SnapCarousel({ children, desktopGridClassName, autoAdvance = fal
     return () => observer.disconnect();
   }, [children.length]);
 
-  // Auto-advance logic
+  // Auto-advance logic (4s interval)
   useEffect(() => {
-    if (!autoAdvance || userInteracted) return;
+    if (!autoAdvance || userInteracted || !isVisible) return;
 
-    // Check for reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
@@ -54,43 +65,40 @@ export function SnapCarousel({ children, desktopGridClassName, autoAdvance = fal
     if (!container) return;
 
     const intervalId = setInterval(() => {
-      // Only auto-advance on mobile (where it actually scrolls)
-      if (window.innerWidth >= 768) return;
+      // Apply on mobile & tablet (below 1024px)
+      if (window.innerWidth >= 1024) return;
 
       const childrenElements = container.querySelectorAll('[data-carousel-item]');
       if (childrenElements.length === 0) return;
 
       let nextIndex = activeIndex + 1;
-      if (nextIndex >= childrenElements.length) {
-        nextIndex = 0;
-      }
+      if (nextIndex >= childrenElements.length) nextIndex = 0;
 
       const nextElement = childrenElements[nextIndex] as HTMLElement;
       if (nextElement) {
-        // Scroll to the next element
         container.scrollTo({
           left: nextElement.offsetLeft - container.offsetLeft,
           behavior: 'smooth'
         });
       }
-    }, 5000);
+    }, 4000);
 
     return () => clearInterval(intervalId);
-  }, [autoAdvance, userInteracted, activeIndex]);
+  }, [autoAdvance, userInteracted, activeIndex, isVisible]);
 
   const handleInteraction = () => {
     setUserInteracted(true);
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <div 
         ref={scrollContainerRef}
         className={cn(
-          "flex overflow-x-auto snap-x snap-mandatory scroll-smooth touch-pan-x",
-          "md:grid md:overflow-visible", // Switch to grid on desktop
-          "scrollbar-none", // Hide scrollbar (requires CSS update)
-          "scroll-padding-inline", // Padding for snapping
+          "flex overflow-x-auto snap-x snap-mandatory scroll-smooth touch-pan-x w-full pb-4",
+          "lg:grid lg:overflow-visible lg:pb-0", 
+          "scrollbar-none scroll-padding-inline", 
+          "[mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] lg:[mask-image:none]",
           desktopGridClassName
         )}
         role="region"
@@ -99,10 +107,7 @@ export function SnapCarousel({ children, desktopGridClassName, autoAdvance = fal
         onScroll={handleInteraction}
         onTouchStart={handleInteraction}
         onFocus={handleInteraction}
-        onKeyDown={() => {
-          handleInteraction();
-          // Allow arrow keys to scroll natively
-        }}
+        onKeyDown={() => handleInteraction()}
       >
         {React.Children.map(children, (child, index) => {
           if (!React.isValidElement(child)) return child;
@@ -110,7 +115,7 @@ export function SnapCarousel({ children, desktopGridClassName, autoAdvance = fal
           
           if (isDesktopOnly) {
             return (
-              <div className="hidden md:block md:col-span-full">
+              <div className="hidden lg:block lg:col-span-full">
                 {child}
               </div>
             );
@@ -120,7 +125,7 @@ export function SnapCarousel({ children, desktopGridClassName, autoAdvance = fal
             <div 
               data-carousel-item 
               data-index={index}
-              className="shrink-0 w-[min(82vw,340px)] snap-center md:w-auto md:shrink"
+              className="shrink-0 w-[82vw] max-w-[340px] snap-start lg:w-auto lg:shrink lg:max-w-none"
             >
               {child}
             </div>
@@ -128,29 +133,36 @@ export function SnapCarousel({ children, desktopGridClassName, autoAdvance = fal
         })}
       </div>
 
-      {/* Dots Indicator (Mobile Only) */}
-      <div className="flex md:hidden justify-center gap-2 mt-6">
-        {React.Children.map(children, (_, index) => (
-          <button
-            key={index}
-            aria-label={`Go to slide ${index + 1}`}
-            className={cn(
-              "w-2 h-2 rounded-full transition-all duration-300",
-              activeIndex === index ? "bg-brand-primary w-4" : "bg-gray-300"
-            )}
-            onClick={() => {
-              handleInteraction();
-              const container = scrollContainerRef.current;
-              const target = container?.querySelector(`[data-index="${index}"]`) as HTMLElement;
-              if (target && container) {
-                container.scrollTo({
-                  left: target.offsetLeft - container.offsetLeft,
-                  behavior: 'smooth'
-                });
-              }
-            }}
-          />
-        ))}
+      {/* Dots Indicator (Mobile/Tablet Only) */}
+      <div className="flex lg:hidden justify-center gap-1.5 mt-2">
+        {React.Children.map(children, (child, index) => {
+          if (React.isValidElement(child) && (child as any).props['data-desktop-only']) return null;
+          return (
+            <button
+              key={index}
+              aria-label={`Go to slide ${index + 1}`}
+              className="w-11 h-11 flex items-center justify-center -mx-2"
+              onClick={() => {
+                handleInteraction();
+                const container = scrollContainerRef.current;
+                const target = container?.querySelector(`[data-index="${index}"]`) as HTMLElement;
+                if (target && container) {
+                  container.scrollTo({
+                    left: target.offsetLeft - container.offsetLeft,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
+            >
+              <div 
+                className={cn(
+                  "h-1.5 rounded-full transition-all duration-300",
+                  activeIndex === index ? "bg-brand-primary w-4" : "bg-gray-300 w-1.5"
+                )}
+              />
+            </button>
+          );
+        })}
       </div>
     </div>
   );
