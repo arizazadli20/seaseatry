@@ -4,7 +4,7 @@ export const siteCopy = {
     tagline: "Satellite & AI Oil Spill Intelligence",
     aiMantra: "AI advises. Humans decide.",
     demoLabel: "DEMO / SIMULATED DATA",
-    demoUrl: "https://pelagosdemo.vercel.app/"
+    demoUrl: "https://seaseatry.vercel.app/"
   },
   hero: {
     headline: "See the spill. Understand the risk. Act.",
