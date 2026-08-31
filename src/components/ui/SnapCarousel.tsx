@@ -95,16 +95,16 @@ export function SnapCarousel({ children, desktopGridClassName, autoAdvance = fal
       <div 
         ref={scrollContainerRef}
         className={cn(
-          "flex overflow-x-auto snap-x snap-mandatory scroll-smooth touch-pan-x w-full pb-4",
-          "lg:grid lg:overflow-visible lg:pb-0", 
-          "scrollbar-none scroll-padding-inline", 
+          "flex overflow-x-auto snap-x snap-mandatory scroll-smooth touch-pan-x w-full pb-4 px-[9vw] gap-4",
+          "lg:grid lg:overflow-visible lg:pb-0 lg:px-0 lg:gap-0", 
+          "scrollbar-none", 
           "[mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] lg:[mask-image:none]",
           desktopGridClassName
         )}
         role="region"
         aria-label={ariaLabel}
         tabIndex={0}
-        onScroll={handleInteraction}
+        onPointerDown={handleInteraction}
         onTouchStart={handleInteraction}
         onFocus={handleInteraction}
         onKeyDown={() => handleInteraction()}
@@ -125,7 +125,7 @@ export function SnapCarousel({ children, desktopGridClassName, autoAdvance = fal
             <div 
               data-carousel-item 
               data-index={index}
-              className="shrink-0 w-[82vw] max-w-[340px] snap-start lg:w-auto lg:shrink lg:max-w-none"
+              className="shrink-0 w-[82vw] max-w-[340px] snap-center lg:w-auto lg:shrink lg:max-w-none"
             >
               {child}
             </div>
