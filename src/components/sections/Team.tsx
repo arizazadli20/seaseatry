@@ -3,7 +3,7 @@ import { SnapCarousel } from '../ui/SnapCarousel';
 
 export function Team() {
   return (
-    <section className="py-16 lg:py-32 bg-gray-50/30">
+    <section className="py-16 lg:py-32 bg-gray-50/30 scroll-mt-14 md:scroll-mt-20">
       <div className="container mx-auto px-0 lg:px-6">
         <div className="max-w-6xl mx-auto">
           <SnapCarousel 

@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="min-h-screen bg-white selection:bg-brand-primary/20 selection:text-brand-primary">
       <Navigation />
-      <main className="pb-24">
+      <main className="pb-[calc(4rem+env(safe-area-inset-bottom))] md:pb-0">
         <Hero />
         <Workflow />
         <CaspianContext />
@@ -22,7 +22,7 @@ function App() {
       </main>
       
       {/* Sticky Bottom Bar for Mobile CTA */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-100 z-50">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-100 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-[max(1rem,env(safe-area-inset-bottom))]">
         <a href="https://pelagosdemo.vercel.app/" className="flex items-center justify-center w-full bg-brand-primary text-white font-medium py-3 rounded-full shadow-md">
           Explore the demo
         </a>
