@@ -6,7 +6,7 @@ export function CaspianContext() {
       <div className="container mx-auto px-[20px] md:px-6 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div>
-            <h2 className="text-[10px] font-mono text-brand-primary tracking-widest uppercase mb-6">
+            <h2 className="text-[13px] font-mono text-brand-primary tracking-widest uppercase mb-6">
               {siteCopy.caspian.title}
             </h2>
             <p className="text-[16px] leading-[1.55] text-gray-500 font-light mb-8">
@@ -41,7 +41,7 @@ export function CaspianContext() {
               <line x1="133" y1="0" x2="133" y2="600" stroke="#1E2A40" strokeWidth="1" strokeDasharray="4 4" opacity="0.15"/>
               <line x1="266" y1="0" x2="266" y2="600" stroke="#1E2A40" strokeWidth="1" strokeDasharray="4 4" opacity="0.15"/>
             </svg>
-            <div className="absolute bottom-4 left-4 md:right-4 md:left-auto text-[10px] font-mono text-gray-500 bg-white/80 px-2 py-1 rounded backdrop-blur-sm">
+            <div className="absolute bottom-4 left-4 md:right-4 md:left-auto text-[13px] font-mono text-gray-500 bg-white/80 px-2 py-1 rounded backdrop-blur-sm">
               VECTOR RENDERING — CASPIAN SEA
             </div>
           </div>

@@ -21,7 +21,7 @@ export function Team() {
                   )}
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-1 tracking-tight">{member.name}</h3>
-                <p className="text-[10px] md:text-xs font-mono text-brand-primary mb-3 uppercase tracking-wider">{member.role}</p>
+                <p className="text-[13px] md:text-[13px] font-mono text-brand-primary mb-3 uppercase tracking-wider">{member.role}</p>
                 <p className="text-base text-gray-500 font-light">{member.responsibility}</p>
               </div>
             ))}

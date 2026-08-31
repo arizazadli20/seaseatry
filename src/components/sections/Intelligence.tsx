@@ -28,7 +28,7 @@ export function Intelligence() {
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-4">{satellite.title}</h3>
             <p className="text-gray-500 font-light text-base md:text-lg mb-6 flex-grow">{satellite.description}</p>
-            <div className="text-[10px] uppercase tracking-widest font-mono text-brand-primary">
+            <div className="text-[13px] uppercase tracking-widest font-mono text-brand-primary">
               {satellite.note}
             </div>
           </div>

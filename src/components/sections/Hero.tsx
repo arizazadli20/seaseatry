@@ -34,7 +34,7 @@ export function Hero() {
             {/* Visual (Map Blob) */}
             <div className="lg:col-span-5 h-[260px] lg:h-[400px] bg-gray-50/50 rounded-2xl relative overflow-hidden flex flex-col group">
               <div className="flex justify-between items-start mb-4 relative z-10 p-6">
-                <span className="text-[10px] font-bold text-gray-500 bg-white/80 backdrop-blur px-3 py-1.5 rounded-full uppercase tracking-wider border border-gray-100 shadow-sm">
+                <span className="text-[13px] font-bold text-gray-500 bg-white/80 backdrop-blur px-3 py-1.5 rounded-full uppercase tracking-wider border border-gray-100 shadow-sm">
                   Prototype integration
                 </span>
                 <div className="w-2.5 h-2.5 rounded-full bg-status-red animate-pulse mt-1 shadow-[0_0_8px_rgba(224,36,36,0.6)]"></div>

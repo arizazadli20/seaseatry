@@ -22,7 +22,7 @@ export function Workflow() {
                 </div>
                 
                 {step.id === "04" && (
-                   <div className="text-[10px] font-mono tracking-widest text-brand-primary uppercase mb-2">
+                   <div className="text-[13px] font-mono tracking-widest text-brand-primary uppercase mb-2">
                      AI advises. Humans decide.
                    </div>
                 )}

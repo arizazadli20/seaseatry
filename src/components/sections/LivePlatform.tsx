@@ -16,7 +16,7 @@ export function LivePlatform() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {/* Card 1: Active Incidents */}
           <div className="bg-white border border-gray-200 rounded-xl p-6 relative flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
-             <div className="absolute top-4 right-4 text-[10px] font-mono tracking-widest text-brand-primary bg-brand-light/30 px-2 py-1 rounded">SIMULATED</div>
+             <div className="absolute top-4 right-4 text-[13px] font-mono tracking-widest text-brand-primary bg-brand-light/30 px-2 py-1 rounded">SIMULATED</div>
              <div className="text-sm font-bold text-gray-500 uppercase mb-8">Active Incidents</div>
              <div className="text-6xl font-bold text-gray-900 tracking-tighter mb-2">6</div>
              <div className="text-base text-gray-500">Open cases under review</div>
@@ -24,7 +24,7 @@ export function LivePlatform() {
 
           {/* Card 2: Sea & Weather */}
           <div className="bg-white border border-gray-200 rounded-xl p-6 relative flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
-             <div className="absolute top-4 right-4 text-[10px] font-mono tracking-widest text-brand-primary bg-brand-light/30 px-2 py-1 rounded">SIMULATED</div>
+             <div className="absolute top-4 right-4 text-[13px] font-mono tracking-widest text-brand-primary bg-brand-light/30 px-2 py-1 rounded">SIMULATED</div>
              <div className="flex justify-between items-start mb-8">
                <div className="text-sm font-bold text-gray-500 uppercase">Sea & Weather</div>
              </div>
@@ -43,7 +43,7 @@ export function LivePlatform() {
 
           {/* Card 3: Detected vs Cleaned Area */}
           <div className="bg-white border border-gray-200 rounded-xl p-6 relative flex flex-col h-full shadow-sm hover:shadow-md transition-shadow">
-             <div className="absolute top-4 right-4 text-[10px] font-mono tracking-widest text-brand-primary bg-brand-light/30 px-2 py-1 rounded">SIMULATED</div>
+             <div className="absolute top-4 right-4 text-[13px] font-mono tracking-widest text-brand-primary bg-brand-light/30 px-2 py-1 rounded">SIMULATED</div>
              <div className="text-sm font-bold text-gray-500 uppercase mb-8">Detected vs Cleaned</div>
              
              <div className="flex flex-col gap-4">
