@@ -16,3 +16,23 @@
     @apply bg-white text-gray-900 font-sans antialiased;
   }
 }
+
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scroll-padding-inline {
+    scroll-padding-inline: 1.5rem;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .scroll-padding-inline {
+      scroll-padding-inline: 0;
+      padding-inline: 0;
+    }
+  }
+}

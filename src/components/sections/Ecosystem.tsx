@@ -2,7 +2,7 @@ import { ecosystemNodes } from '../../content/ecosystem';
 
 export function Ecosystem() {
   return (
-    <section className="py-24 border-b border-gray-200 bg-white">
+    <section className="py-16 md:py-24 border-b border-gray-200 bg-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-sm font-mono text-brand-primary tracking-widest uppercase mb-4">

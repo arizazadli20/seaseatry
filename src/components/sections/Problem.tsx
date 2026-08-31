@@ -2,7 +2,7 @@ import { siteCopy } from '../../content/copy';
 
 export function Problem() {
   return (
-    <section className="py-24 border-b border-gray-200 bg-white">
+    <section className="py-16 md:py-24 border-b border-gray-200 bg-white">
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-sm font-mono text-brand-primary tracking-widest uppercase mb-8">

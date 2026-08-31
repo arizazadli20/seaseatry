@@ -2,7 +2,7 @@ import { siteCopy } from '../../content/copy';
 
 export function CaspianContext() {
   return (
-    <section className="py-24 border-b border-gray-200 relative overflow-hidden bg-white">
+    <section className="py-16 md:py-24 border-b border-gray-200 relative overflow-hidden bg-white">
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
@@ -31,7 +31,7 @@ export function CaspianContext() {
             </div>
           </div>
           
-          <div className="relative h-[400px] border border-gray-200 bg-gray-50/50 rounded flex items-center justify-center p-8">
+          <div className="relative aspect-[3/4] md:aspect-auto md:h-[400px] border border-gray-200 bg-gray-50/50 rounded flex items-center justify-center p-8 w-full max-w-sm mx-auto lg:max-w-none">
             {/* Minimalist SVG representation of the Caspian Sea */}
             <svg viewBox="0 0 400 600" className="w-full h-full opacity-60" fill="none" stroke="currentColor">
               <path 
@@ -52,7 +52,7 @@ export function CaspianContext() {
               <line x1="133" y1="0" x2="133" y2="600" stroke="#1E2A40" strokeWidth="1" strokeDasharray="4 4" opacity="0.3"/>
               <line x1="266" y1="0" x2="266" y2="600" stroke="#1E2A40" strokeWidth="1" strokeDasharray="4 4" opacity="0.3"/>
             </svg>
-            <div className="absolute bottom-4 right-4 text-[10px] font-mono text-gray-500">
+            <div className="absolute bottom-4 left-4 md:right-4 md:left-auto text-[10px] font-mono text-gray-500">
               VECTOR RENDERING — CASPIAN SEA
             </div>
           </div>

@@ -3,7 +3,7 @@ import { Button } from '../ui/Button';
 
 export function LivePlatform() {
   return (
-    <section className="py-24 border-b border-gray-100 bg-gray-50 relative overflow-hidden">
+    <section className="py-16 md:py-24 border-b border-gray-100 bg-gray-50 relative overflow-hidden">
       {/* Halftone pattern to match Hero */}
       <div className="absolute inset-0 bg-[radial-gradient(#d1d5db_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-40 pointer-events-none"></div>
       

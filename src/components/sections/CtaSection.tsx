@@ -5,7 +5,7 @@ export function CtaSection() {
   return (
     <footer className="bg-white border-t border-gray-200">
       {/* Demo Day CTA */}
-      <div className="py-32 border-b border-gray-200 text-center px-6">
+      <div className="py-16 md:py-32 border-b border-gray-200 text-center px-6">
         <h2 className="text-4xl md:text-5xl font-medium text-gray-900 mb-6">
           {siteCopy.demoCta.title}
         </h2>
@@ -23,7 +23,7 @@ export function CtaSection() {
       </div>
 
       {/* Final Restrained CTA & Footer */}
-      <div className="py-24 px-6 text-center">
+      <div className="py-16 md:py-24 px-6 text-center">
         <div className="space-y-2 mb-16">
           {siteCopy.finalCta.lines.map((line, i) => (
             <p key={i} className="text-2xl font-light text-gray-500 tracking-wide">

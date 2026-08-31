@@ -14,7 +14,7 @@ export function SampleIncident() {
   const [stepIndex, setStepIndex] = useState(2); // Start at REVIEWED
 
   return (
-    <section className="py-24 border-b border-gray-200 bg-white">
+    <section className="py-16 md:py-24 border-b border-gray-200 bg-white">
       <div className="container mx-auto px-6">
         <div className="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
           <div>

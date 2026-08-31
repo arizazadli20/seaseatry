@@ -2,7 +2,7 @@ import { siteCopy } from '../../content/copy';
 
 export function SorbentConcept() {
   return (
-    <section className="py-24 border-b border-gray-200 bg-gray-50 relative overflow-hidden">
+    <section className="py-16 md:py-24 border-b border-gray-200 bg-gray-50 relative overflow-hidden">
       {/* Visual differentiation for research concept */}
       <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNGRkYiLz48L3N2Zz4=')] bg-[size:20px_20px]"></div>
 

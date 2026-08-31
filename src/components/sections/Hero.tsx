@@ -19,7 +19,7 @@ export function Hero() {
                <h2 className="text-[10px] sm:text-xs font-bold text-brand-primary tracking-widest uppercase mb-6 sm:mb-8 inline-block px-4 py-1.5 bg-brand-light/50 rounded-full border border-brand-light">
                  CASPIAN SEA MONITORING PLATFORM
                </h2>
-               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-[1.05] tracking-tight">
+               <h1 className="text-[clamp(2.25rem,9vw,6rem)] font-bold text-gray-900 mb-6 leading-[1.05] tracking-tight">
                  See the Spill.<br/>
                  <span className="text-gray-300">Understand the Risk.</span><br/>
                  Act.
@@ -39,7 +39,7 @@ export function Hero() {
           </div>
 
           {/* Map / Visual Bento Box */}
-          <div className="md:col-span-4 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-[2rem] p-6 shadow-sm relative overflow-hidden min-h-[320px] flex flex-col group">
+          <div className="md:col-span-4 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-[2rem] p-6 shadow-sm relative overflow-hidden h-[260px] md:h-auto md:min-h-[320px] flex flex-col group">
             <div className="flex justify-between items-start mb-4 relative z-10">
               <span className="text-[10px] font-bold text-gray-500 bg-white/80 backdrop-blur px-3 py-1.5 rounded-full uppercase tracking-wider border border-gray-100 shadow-sm">
                 Sentinel-1 SAR
@@ -74,16 +74,16 @@ export function Hero() {
 
           {/* Small Info Bento Box 2 */}
           <div className="md:col-span-8 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-[2rem] p-8 shadow-sm flex items-center justify-center">
-             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 w-full text-center sm:text-left">
-                <div className="sm:border-r border-gray-100 sm:pr-6">
+             <div className="flex flex-col sm:flex-row w-full text-center sm:text-left divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+                <div className="pb-6 sm:pb-0 sm:pr-6 sm:w-1/3">
                   <div className="text-3xl font-bold text-gray-900 tracking-tight">10s</div>
                   <div className="text-xs text-gray-500 mt-2 font-medium">Detection response cycle</div>
                 </div>
-                <div className="sm:border-r border-gray-100 sm:pr-6">
+                <div className="py-6 sm:py-0 sm:px-6 sm:w-1/3">
                   <div className="text-3xl font-bold text-gray-900 tracking-tight">87<span className="text-brand-primary">%</span></div>
                   <div className="text-xs text-gray-500 mt-2 font-medium">Average AI confidence</div>
                 </div>
-                <div>
+                <div className="pt-6 sm:pt-0 sm:pl-6 sm:w-1/3">
                   <div className="text-3xl font-bold text-gray-900 tracking-tight">24/7</div>
                   <div className="text-xs text-gray-500 mt-2 font-medium">Caspian Sea monitoring</div>
                 </div>

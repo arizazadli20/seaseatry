@@ -2,7 +2,7 @@ import { siteCopy } from '../../content/copy';
 
 export function Impact() {
   return (
-    <section className="py-24 border-b border-gray-200 bg-gray-50/10">
+    <section className="py-16 md:py-24 border-b border-gray-200 bg-gray-50/10">
       <div className="container mx-auto px-6 max-w-5xl">
         <div className="text-center mb-16">
           <h2 className="text-sm font-mono text-brand-primary tracking-widest uppercase mb-4">
