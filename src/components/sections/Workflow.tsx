@@ -9,9 +9,6 @@ export function Workflow() {
           <h2 className="text-sm font-mono text-brand-primary tracking-widest uppercase mb-4">
             {siteCopy.workflow.title}
           </h2>
-          <p className="text-2xl md:text-3xl font-medium text-gray-900">
-            {siteCopy.differentiation.seasentry.split(' → ').join(' → ')}
-          </p>
         </div>
 
         <div className="max-w-5xl mx-auto relative">
