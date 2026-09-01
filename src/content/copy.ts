@@ -13,37 +13,43 @@ export const siteCopy = {
     secondaryCta: "How it works"
   },
   workflow: {
-    title: "The Workflow",
+    title: "From Detection to Response",
+    description: "Every confirmed spill moves through the same five stages, each leaving a record the next stage can build on.",
     steps: [
       {
-        id: "01",
-        title: "DETECT",
-        description: "Satellite imagery flags suspicious surface patterns."
+        id: "1",
+        title: "Detect",
+        description: "Suspicious surface patterns flagged from satellite imagery.",
+        color: "#7FA992", // sage green
+        bgColor: "rgba(127,169,146,0.15)"
       },
       {
-        id: "02",
-        title: "ANALYZE",
-        description: "AI estimates area, confidence and risk."
+        id: "2",
+        title: "Analyze",
+        description: "Area, confidence and risk estimated by AI models.",
+        color: "#8AB19D", // slightly lighter sage
+        bgColor: "rgba(138,177,157,0.15)"
       },
       {
-        id: "03",
-        title: "CROSS-CHECK",
-        description: "Vessel, weather and location data add context."
+        id: "3",
+        title: "Review",
+        description: "A human operator confirms, rejects or escalates the event.",
+        color: "#C69C6D", // golden/mustard
+        bgColor: "rgba(198,156,109,0.15)"
       },
       {
-        id: "04",
-        title: "HUMAN REVIEW",
-        description: "An expert confirms or rejects the finding."
+        id: "4",
+        title: "Sorbent Material",
+        description: "Cotton-waste sorbent deployed to absorb the confirmed spill.",
+        color: "#D96C5B", // terracotta/red
+        bgColor: "rgba(217,108,91,0.15)"
       },
       {
-        id: "05",
-        title: "RESPOND",
-        description: "Coordinate teams and monitor the affected area."
-      },
-      {
-        id: "06",
-        title: "TRACK",
-        description: "Follow the incident through to resolution."
+        id: "5",
+        title: "Track",
+        description: "Status, affected area and response progress stay on record.",
+        color: "#4A7C75", // deep teal
+        bgColor: "rgba(74,124,117,0.15)"
       }
     ]
   },
