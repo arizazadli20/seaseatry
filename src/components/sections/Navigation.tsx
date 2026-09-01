@@ -45,14 +45,12 @@ export function Navigation() {
           
           <div className="flex items-center">
             {/* Full Logo */}
-            <div className={`h-12 md:h-14 relative overflow-hidden transition-all duration-300 ${
-              !scrolled ? 'opacity-90' : 'opacity-100'
-            }`}>
+            <div className="h-12 md:h-14 transition-all duration-300">
               <img 
                 src="/logo.jpeg" 
                 alt="SeaSentry Logo" 
                 className={`h-full w-auto object-contain transition-all duration-300 ${scrolled ? 'mix-blend-multiply' : 'mix-blend-screen'}`} 
-                style={!scrolled ? { filter: 'invert(1) grayscale(1) brightness(2)' } : {}} 
+                style={!scrolled ? { filter: 'invert(1) grayscale(1) brightness(1.5)' } : {}} 
               />
             </div>
           </div>
