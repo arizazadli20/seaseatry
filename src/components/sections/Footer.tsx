@@ -13,10 +13,10 @@ export function Footer() {
             <div className="mb-12 lg:mb-0">
               <div className="h-10 inline-block mb-8">
                 <img 
-                  src="/logo.jpeg" 
+                  src="/logo.png" 
                   alt="SeaSentry Logo" 
-                  className="h-full w-auto object-contain mix-blend-screen" 
-                  style={{ filter: 'invert(1) grayscale(1) brightness(1.5)' }} 
+                  className="h-full w-auto object-contain" 
+                  style={{ filter: 'brightness(0) invert(1)' }} 
                 />
               </div>
               <p className="text-[11px] text-gray-400 font-medium tracking-wide leading-relaxed uppercase">

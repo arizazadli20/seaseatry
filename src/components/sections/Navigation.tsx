@@ -47,10 +47,10 @@ export function Navigation() {
             {/* Full Logo */}
             <div className="h-12 md:h-14 transition-all duration-300">
               <img 
-                src="/logo.jpeg" 
+                src="/logo.png" 
                 alt="SeaSentry Logo" 
-                className={`h-full w-auto object-contain transition-all duration-300 ${scrolled ? 'mix-blend-multiply' : 'mix-blend-screen'}`} 
-                style={!scrolled ? { filter: 'invert(1) grayscale(1) brightness(1.5)' } : {}} 
+                className="h-full w-auto object-contain transition-all duration-300" 
+                style={!scrolled ? { filter: 'brightness(0) invert(1)' } : { filter: 'drop-shadow(0 0 1px rgba(0,0,0,0.1))' }} 
               />
             </div>
           </div>
