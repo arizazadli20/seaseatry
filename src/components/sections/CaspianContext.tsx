@@ -51,6 +51,18 @@ export function CaspianContext() {
         // Pulse twice and stop
         .to(marker, { scale: 1.5, opacity: 0.5, duration: 0.3, yoyo: true, repeat: 3, ease: 'power1.inOut' });
     }
+
+    // Parallax on the entire SVG
+    gsap.to(svgRef.current, {
+      yPercent: 12,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
   }, { scope: containerRef });
 
   return (

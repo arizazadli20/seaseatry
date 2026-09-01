@@ -6,24 +6,30 @@ import { SnapCarousel } from '../ui/SnapCarousel';
 
 export function Intelligence() {
   const containerRef = useRef<HTMLElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
   const { ai, satellite, vessel } = siteCopy.intelligence;
 
   useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    // Clip wipe upward tied to scroll
-    gsap.fromTo(containerRef.current,
-      { clipPath: 'inset(100% 0 0 0)' },
-      {
-        clipPath: 'inset(0% 0 0 0)',
-        ease: 'none',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top bottom',
-          end: 'bottom bottom',
-          scrub: true
-        }
+    // Clip wipe upward tied to scroll + parallax content slide
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top bottom',
+        end: 'bottom bottom',
+        scrub: true
       }
+    });
+
+    tl.fromTo(containerRef.current,
+      { clipPath: 'inset(100% 0 0 0)' },
+      { clipPath: 'inset(0% 0 0 0)', ease: 'none' },
+      0
+    ).fromTo(innerRef.current,
+      { y: '25vh' },
+      { y: '0vh', ease: 'none' },
+      0
     );
     
     // Cards tilt 3deg into place as they enter
@@ -47,8 +53,8 @@ export function Intelligence() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="scroll-mt-14 md:scroll-mt-20 py-24 lg:py-32 bg-[#0B1121] relative z-20">
-      <div className="container mx-auto px-0 lg:px-6 max-w-7xl">
+    <section ref={containerRef} className="scroll-mt-14 md:scroll-mt-20 py-24 lg:py-32 bg-[#0B1121] relative z-20 overflow-hidden">
+      <div ref={innerRef} className="container mx-auto px-0 lg:px-6 max-w-7xl">
         <SnapCarousel 
           ariaLabel="Intelligence Pillars" 
           desktopGridClassName="grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 lg:divide-x divide-white/10"

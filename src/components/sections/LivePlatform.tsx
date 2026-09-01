@@ -43,6 +43,7 @@ export function LivePlatform() {
   useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    // Initial enter animation
     gsap.fromTo(frameRef.current,
       { y: 60, scale: 0.96, opacity: 0 },
       {
@@ -58,6 +59,20 @@ export function LivePlatform() {
         }
       }
     );
+
+    // Continuous scroll parallax (drifting up and scaling slightly)
+    gsap.to(frameRef.current, {
+      yPercent: -8,
+      scale: 1.02,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+
   }, { scope: containerRef });
 
   return (
