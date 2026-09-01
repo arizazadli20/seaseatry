@@ -1,0 +1,78 @@
+// Footer component
+
+export function Footer() {
+  return (
+    <footer className="bg-[#0B1121] border-t border-white/10 pt-20 pb-8 px-[20px] md:px-6 relative z-20 pb-24 md:pb-8">
+      <div className="container mx-auto max-w-7xl">
+        
+        {/* Main Footer Content */}
+        <div className="flex flex-col lg:flex-row justify-between gap-16 lg:gap-8 mb-24">
+          
+          {/* Left Column - Logo & Tagline */}
+          <div className="flex flex-col justify-between lg:w-1/3">
+            <div className="mb-12 lg:mb-0">
+              <div className="h-10 relative overflow-hidden inline-block opacity-90 mb-8">
+                <img 
+                  src="/logo.jpeg" 
+                  alt="SeaSentry Logo" 
+                  className="h-full w-auto object-contain mix-blend-screen" 
+                  style={{ filter: 'invert(1) grayscale(1) brightness(2)' }} 
+                />
+              </div>
+              <p className="text-[11px] text-gray-400 font-medium tracking-wide leading-relaxed uppercase">
+                Engineered in Azerbaijan.<br/>
+                Protecting the Caspian Sea.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Columns - Links */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-12 lg:w-2/3 lg:pl-16">
+            
+            {/* Column 1 */}
+            <div>
+              <h4 className="text-[12px] text-gray-500 font-medium tracking-wide mb-6 uppercase">Company</h4>
+              <ul className="space-y-4">
+                <li><a href="#" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">About Us</a></li>
+                <li><a href="#" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">Team</a></li>
+                <li><a href="#" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">Contact Us</a></li>
+              </ul>
+            </div>
+
+            {/* Column 2 */}
+            <div>
+              <h4 className="text-[12px] text-gray-500 font-medium tracking-wide mb-6 uppercase">Social Media</h4>
+              <ul className="space-y-4">
+                <li><a href="#" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">LinkedIn</a></li>
+                <li><a href="#" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">Instagram</a></li>
+                <li><a href="#" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">Twitter</a></li>
+              </ul>
+            </div>
+
+            {/* Column 3 */}
+            <div className="col-span-2 md:col-span-1">
+              <h4 className="text-[12px] text-gray-500 font-medium tracking-wide mb-6 uppercase">Contact Us</h4>
+              <ul className="space-y-4">
+                <li className="text-[13px] text-white font-medium leading-relaxed uppercase">
+                  Baku, AZ1000,<br/>
+                  Azerbaijan
+                </li>
+                <li><a href="tel:+994120000000" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">+994 12 000 00 00</a></li>
+                <li><a href="mailto:info@seasentry.az" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">info@seasentry.az</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Bottom Copyright */}
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[11px] text-gray-400 font-medium tracking-wide uppercase text-center md:text-left">
+            © {new Date().getFullYear()} SeaSentry. All rights reserved.
+          </p>
+        </div>
+
+      </div>
+    </footer>
+  );
+}

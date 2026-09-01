@@ -10,6 +10,7 @@ import { LivePlatform } from './components/sections/LivePlatform';
 import { Response } from './components/sections/Response';
 import { Team } from './components/sections/Team';
 import { FinalCta } from './components/sections/FinalCta';
+import { Footer } from './components/sections/Footer';
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -54,6 +55,7 @@ function App() {
           <Response />
           <Team />
           <FinalCta />
+          <Footer />
         </main>
         
         {/* Sticky Bottom Bar for Mobile CTA */}
