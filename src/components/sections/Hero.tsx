@@ -98,7 +98,7 @@ export function Hero() {
           aria-hidden="true"
           tabIndex={-1}
           className="absolute inset-0 w-full h-full object-cover object-center"
-          style={{ filter: 'saturate(0.45) contrast(1.05)' }}
+          style={{ filter: 'saturate(0.4) brightness(0.78)' }}
         >
           <source src="/hero.webm" type="video/webm" />
           <source src="/hero.mp4" type="video/mp4" />
@@ -109,20 +109,18 @@ export function Hero() {
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover object-center"
-          style={{ filter: 'saturate(0.45) contrast(1.05)' }}
+          style={{ filter: 'saturate(0.4) brightness(0.78)' }}
         />
       )}
 
-      {/* Overlay: sage tint + bottom gradient */}
+      {/* Directional Scrims */}
       <div
         ref={overlayRef}
-        className="absolute inset-0 z-10"
-        style={{
-          background: `
-            linear-gradient(to bottom, rgba(127,169,146,0.50) 0%, rgba(127,169,146,0.45) 65%, rgba(11,17,33,0.80) 100%)
-          `
-        }}
-      />
+        className="absolute inset-0 z-10 pointer-events-none transition-colors duration-0"
+      >
+        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(11,26,35,0.88)_0%,rgba(11,26,35,0.55)_38%,transparent_68%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(11,26,35,0.55),transparent_60%)]" />
+      </div>
 
       {/* Technical Grid */}
       <div className="absolute inset-0 z-20 pointer-events-none">
@@ -145,9 +143,12 @@ export function Hero() {
         {/* Upper-left block ~50% down */}
         <div className="mt-[50svh] md:mt-[45svh]">
           <div className="overflow-hidden">
-            <div className="hero-reveal text-[12px] md:text-[13px] uppercase tracking-[0.08em] text-white/80 font-light leading-relaxed max-w-[280px] md:max-w-[320px]">
-              <span className="text-brand-primary mr-1.5">/</span>
-              DESIGNED FOR THE CASPIAN SEA — SATELLITE AND AI OIL SPILL INTELLIGENCE.
+            <div className="hero-reveal text-[12px] uppercase tracking-[0.06em] text-white/90 font-medium leading-[1.5] max-w-[280px] md:max-w-[320px] flex">
+              <span className="text-brand-primary mr-1.5 shrink-0">/</span>
+              <div>
+                CASPIAN SEA — SATELLITE & AI<br />
+                OIL SPILL INTELLIGENCE
+              </div>
             </div>
           </div>
         </div>
@@ -155,7 +156,7 @@ export function Hero() {
         {/* Right-aligned block, below crosshair */}
         <div className="absolute right-[20px] top-[66%] text-right">
           <div className="overflow-hidden">
-            <div className="hero-reveal text-[13px] uppercase tracking-[0.08em] text-white/70 font-light leading-relaxed">
+            <div className="hero-reveal text-[13px] uppercase tracking-[0.06em] text-white/90 font-medium leading-relaxed">
               AI ADVISES.<br />
               HUMANS DECIDE.
             </div>
@@ -166,11 +167,11 @@ export function Hero() {
         <div className="flex-grow" />
 
         {/* Bottom headline */}
-        <div className="mb-[90px] md:mb-[100px]">
+        <div className="mb-[90px]">
           <div className="overflow-hidden">
-            <h1 className="hero-reveal text-[clamp(2.75rem,13vw,4.5rem)] md:text-[clamp(3rem,6vw,5rem)] font-bold uppercase leading-[0.92] tracking-tighter">
-              <span className="text-white block">ENGINEERED</span>
-              <span className="text-brand-primary/70 block">TO RESPOND</span>
+            <h1 className="hero-reveal text-[clamp(2.5rem,12vw,4rem)] font-bold uppercase leading-[0.92] tracking-tighter">
+              <span className="text-white block">DETECT. TREAT.</span>
+              <span className="text-brand-primary block">RECYCLE.</span>
             </h1>
           </div>
         </div>
