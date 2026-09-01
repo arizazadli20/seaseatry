@@ -46,10 +46,9 @@ export function Navigation() {
           <div className="flex items-center gap-3">
             {/* Logo Icon */}
             <div className={`w-8 h-8 md:w-10 md:h-10 shrink-0 rounded-full flex items-center justify-center relative overflow-hidden transition-colors duration-300 ${
-              scrolled ? 'bg-brand-light text-brand-primary' : 'bg-white/15 text-white'
+              scrolled ? 'bg-brand-light text-brand-primary' : 'bg-white text-brand-primary ring-2 ring-white/20'
             }`}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="absolute top-1.5 md:top-2 w-[16px] h-[16px] md:w-[20px] md:h-[20px]"><path d="m14.5 12 4-4"/><path d="m19 8-1.5-1.5"/><path d="m11 5-1.5-1.5"/><path d="m5 11-1.5-1.5"/><path d="m8 19-1.5-1.5"/><path d="m12 14.5-4 4"/><circle cx="12" cy="12" r="2.5"/><path d="m15.5 15.5 1.5 1.5"/><path d="m18 18 .5.5"/></svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`absolute bottom-0.5 md:bottom-1 w-[20px] h-[20px] md:w-[24px] md:h-[24px] transition-colors duration-300 ${scrolled ? 'text-[#4B5563]' : 'text-white/60'}`}><path d="M2 12h20"/><path d="M4 15h16"/><path d="M6 18h12"/></svg>
+              <img src="/logo-mark.jpg" alt="SeaSentry Logo" className="w-full h-full object-cover p-1 bg-white" />
             </div>
             
             <div className="flex flex-col justify-center">
