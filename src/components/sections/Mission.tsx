@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { siteCopy } from '../../content/copy';
 
 export function Mission() {
   const containerRef = useRef<HTMLElement>(null);
@@ -103,12 +102,6 @@ export function Mission() {
           <p className="mission-reveal text-[16px] md:text-[18px] text-gray-300 font-light leading-relaxed max-w-2xl mx-auto mb-12">
             SeaSentry — a satellite and AI platform for oil spill intelligence — turns orbital data into operational response. Through SAR detection, AI risk analysis, and bio-sorbent recovery, response teams act in hours instead of days.
           </p>
-
-          {/* Button */}
-          <a href={siteCopy.global.demoUrl} className="mission-reveal group relative inline-flex items-center justify-center px-8 py-3 overflow-hidden text-[13px] font-medium tracking-widest text-white uppercase border border-white/30 hover:border-white transition-colors duration-300">
-            <span className="relative z-10 group-hover:text-black transition-colors duration-300">LEARN MORE</span>
-            <div className="absolute inset-0 bg-white scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-300 ease-in-out" />
-          </a>
 
         </div>
       </div>

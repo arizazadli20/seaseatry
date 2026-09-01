@@ -1,5 +1,3 @@
-import { siteCopy } from '../../content/copy';
-import { Button } from '../ui/Button';
 import { useState, useEffect } from 'react';
 
 export function Navigation() {
@@ -34,14 +32,6 @@ export function Navigation() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            {/* Desktop CTA */}
-            <div className="hidden md:block">
-              <Button href={siteCopy.global.demoUrl} variant="primary" className="px-6 py-2 shadow-sm">
-                Explore Platform
-              </Button>
-            </div>
-          </div>
         </div>
       </nav>
     </>

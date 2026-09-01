@@ -33,9 +33,9 @@ export function Footer() {
             <div>
               <h4 className="text-[12px] text-gray-500 font-medium tracking-wide mb-6 uppercase">Company</h4>
               <ul className="space-y-4">
-                <li><a href="#" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">About Us</a></li>
-                <li><a href="#" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">Team</a></li>
-                <li><a href="#" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">Contact Us</a></li>
+                <li><a href="#hero" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">About Us</a></li>
+                <li><a href="#team" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">Team</a></li>
+                <li><a href="mailto:seasentry@gmail.com" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">Contact Us</a></li>
               </ul>
             </div>
 
@@ -43,9 +43,9 @@ export function Footer() {
             <div>
               <h4 className="text-[12px] text-gray-500 font-medium tracking-wide mb-6 uppercase">Platform</h4>
               <ul className="space-y-4">
-                <li><a href="#" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">Satellite Intel</a></li>
-                <li><a href="#" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">AI Analysis</a></li>
-                <li><a href="#" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">Sorbent Recovery</a></li>
+                <li><a href="#workflow" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">Satellite Intel</a></li>
+                <li><a href="#intelligence" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">AI Analysis</a></li>
+                <li><a href="#problem" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">Sorbent Recovery</a></li>
               </ul>
             </div>
 
@@ -58,7 +58,7 @@ export function Footer() {
                   Azerbaijan
                 </li>
                 <li><a href="tel:+994503806566" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">+994 50 380 65 66</a></li>
-                <li><a href="mailto:info@seasentry.az" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">info@seasentry.az</a></li>
+                <li><a href="mailto:seasentry@gmail.com" className="text-[13px] text-white font-medium hover:text-brand-primary transition-colors uppercase">seasentry@gmail.com</a></li>
               </ul>
             </div>
 

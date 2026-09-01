@@ -84,7 +84,7 @@ export function Hero() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative w-full h-[100svh] overflow-hidden">
+    <section ref={containerRef} id="hero" className="relative w-full h-[100svh] overflow-hidden">
       {/* Video / Poster */}
       {shouldLoadVideo ? (
         <video
