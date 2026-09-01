@@ -7,7 +7,6 @@ import { AiAdvises } from './components/sections/AiAdvises';
 import { CaspianContext } from './components/sections/CaspianContext';
 import { Intelligence } from './components/sections/Intelligence';
 import { LivePlatform } from './components/sections/LivePlatform';
-import { Response } from './components/sections/Response';
 import { Team } from './components/sections/Team';
 import { FinalCta } from './components/sections/FinalCta';
 import { Footer } from './components/sections/Footer';
@@ -53,7 +52,6 @@ function App() {
           <CaspianContext />
           <Intelligence />
           <LivePlatform />
-          <Response />
           <Mission />
           <Team />
           <FinalCta />
