@@ -43,12 +43,12 @@ export function Navigation() {
       }`}>
         <div className="w-full px-[20px] md:px-6 h-[56px] md:h-20 flex items-center justify-between max-w-7xl mx-auto">
           
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 md:gap-4">
             {/* Logo Icon */}
-            <div className={`w-8 h-8 md:w-10 md:h-10 shrink-0 rounded-full flex items-center justify-center relative overflow-hidden transition-colors duration-300 ${
-              scrolled ? 'bg-brand-light text-brand-primary' : 'bg-white text-brand-primary ring-2 ring-white/20'
+            <div className={`w-10 h-10 md:w-14 md:h-14 shrink-0 rounded-full flex items-center justify-center relative overflow-hidden transition-all duration-300 ${
+              !scrolled && 'shadow-[0_0_15px_rgba(255,255,255,0.15)]'
             }`}>
-              <img src="/logo-mark.jpg" alt="SeaSentry Logo" className="w-full h-full object-cover p-1 bg-white" />
+              <img src="/logo-mark.jpg" alt="SeaSentry Logo" className="w-full h-full object-cover bg-white scale-[1.05]" />
             </div>
             
             <div className="flex flex-col justify-center">
