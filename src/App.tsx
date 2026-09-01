@@ -47,7 +47,6 @@ function App() {
         <Navigation />
         <main className="relative z-10 bg-white">
           <Hero />
-          <Mission />
           <Problem />
           <Workflow />
           <AiAdvises />
@@ -55,6 +54,7 @@ function App() {
           <Intelligence />
           <LivePlatform />
           <Response />
+          <Mission />
           <Team />
           <FinalCta />
           <Footer />
