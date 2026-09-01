@@ -1,100 +1,180 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { siteCopy } from '../../content/copy';
 
 export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const graphicRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(true);
+
+  // Check for reduced motion / save-data / slow connection
+  useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const conn = (navigator as any).connection;
+    const saveData = conn?.saveData;
+    const slowConnection = conn?.effectiveType === '2g' || conn?.effectiveType === '3g';
+
+    if (prefersReduced || saveData || slowConnection) {
+      setShouldLoadVideo(false);
+    }
+  }, []);
+
+  // Pause video when off-screen
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !shouldLoadVideo) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [shouldLoadVideo]);
 
   useGSAP(() => {
-    // Respect reduced motion
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
-    }
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
 
-    const tl = gsap.timeline();
-
-    // Mask-reveal headline lines
-    const lines = headlineRef.current?.querySelectorAll('.line-reveal');
-    if (lines) {
-      tl.fromTo(lines, 
-        { y: '110%' }, 
-        { y: '0%', duration: 0.9, stagger: 0.1, ease: 'cubic-bezier(0.16, 1, 0.3, 1)' }
+    // Mask-reveal text blocks staggered 120ms
+    const blocks = containerRef.current?.querySelectorAll('.hero-reveal');
+    if (blocks) {
+      gsap.fromTo(blocks,
+        { y: '110%' },
+        { y: '0%', duration: 0.8, stagger: 0.12, ease: 'cubic-bezier(0.16, 1, 0.3, 1)', delay: 0.3 }
       );
     }
 
-    // Scan line sweeps across graphic (2.4s, stops)
-    const scanline = graphicRef.current?.querySelector('.scan-line');
-    if (scanline) {
-      tl.fromTo(scanline,
-        { left: '-10%' },
-        { left: '110%', duration: 2.4, ease: 'power2.inOut' },
-        "-=0.5"
+    // Grid hairlines draw from centre outward
+    const hLines = containerRef.current?.querySelectorAll('.grid-line');
+    if (hLines) {
+      gsap.fromTo(hLines,
+        { scaleX: 0, scaleY: 0 },
+        { scaleX: 1, scaleY: 1, duration: 0.9, ease: 'power2.out', delay: 0.2, stagger: 0.05 }
       );
     }
 
-    // Sticky handoff out
-    gsap.to(containerRef.current, {
-      scale: 0.94,
-      opacity: 0.4,
-      ease: "none",
+    // Crosshair fade in
+    const crosshair = containerRef.current?.querySelector('.crosshair');
+    if (crosshair) {
+      gsap.fromTo(crosshair, { opacity: 0 }, { opacity: 1, duration: 0.6, delay: 0.8 });
+    }
+
+    // Scroll-out: video scales 1 → 1.06, overlay darkens
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top top",
-        end: "bottom top",
+        start: 'top top',
+        end: 'bottom top',
         scrub: true,
         pin: true,
         pinSpacing: false,
       }
     });
 
-    gsap.to(headlineRef.current, {
-      y: -40,
-      ease: "none",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      }
-    });
-
+    tl.to(videoRef.current, { scale: 1.06, ease: 'none' }, 0)
+      .to(overlayRef.current, { backgroundColor: 'rgba(11, 17, 33, 0.75)', ease: 'none' }, 0);
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="h-[100svh] w-full bg-white relative overflow-hidden flex flex-col justify-center">
-      <div className="w-full px-[20px] max-w-7xl mx-auto flex-grow flex flex-col pt-14 pb-14">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 flex-grow items-center">
-          
-          <div className="lg:col-span-7 flex flex-col justify-center">
-             <h1 ref={headlineRef} className="text-[clamp(2.5rem,10vw,3.25rem)] lg:text-7xl font-bold text-gray-900 leading-[1.05] tracking-tighter mb-6">
-               <div className="overflow-hidden"><div className="line-reveal block">See the spill.</div></div>
-               <div className="overflow-hidden"><div className="line-reveal block">Understand the risk.</div></div>
-               <div className="overflow-hidden"><div className="line-reveal block">Act.</div></div>
-             </h1>
-             
-             <p className="text-[16px] leading-[1.55] text-gray-500 max-w-md font-light mb-8 lg:mb-12">
-               {siteCopy.hero.supporting}
-             </p>
-          </div>
+    <section ref={containerRef} className="relative w-full h-[100svh] overflow-hidden">
+      {/* Video / Poster */}
+      {shouldLoadVideo ? (
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/hero-poster.jpg"
+          aria-hidden="true"
+          tabIndex={-1}
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          style={{ filter: 'saturate(0.45) contrast(1.05)' }}
+        >
+          <source src="/hero.webm" type="video/webm" />
+          <source src="/hero.mp4" type="video/mp4" />
+        </video>
+      ) : (
+        <img
+          src="/hero-poster.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          style={{ filter: 'saturate(0.45) contrast(1.05)' }}
+        />
+      )}
 
-          <div ref={graphicRef} className="lg:col-span-5 h-[260px] lg:h-[400px] bg-gray-50 rounded-[28px] relative overflow-hidden flex flex-col shadow-sm">
-            <div className="absolute inset-0 bg-white/50 backdrop-blur-sm">
-               {/* Decorative Marks */}
-               <div className="absolute left-[15%] top-[25%] w-[70%] h-[50%] bg-brand-light/30 rounded-full blur-2xl"></div>
-               {/* Sea Graphic */}
-               <svg viewBox="0 0 100 100" className="w-full h-full opacity-20" preserveAspectRatio="none">
-                 <path d="M0,50 Q25,30 50,50 T100,50 L100,100 L0,100 Z" fill="#0B1121" />
-                 <path d="M0,70 Q25,50 50,70 T100,70 L100,100 L0,100 Z" fill="#4B5563" />
-               </svg>
-            </div>
-            {/* Scan line */}
-            <div className="scan-line absolute top-0 bottom-0 w-[4px] bg-brand-primary/50 blur-[2px] shadow-[0_0_12px_rgba(var(--brand-primary),0.8)] -left-[10%]"></div>
-          </div>
-          
+      {/* Overlay: sage tint + bottom gradient */}
+      <div
+        ref={overlayRef}
+        className="absolute inset-0 z-10"
+        style={{
+          background: `
+            linear-gradient(to bottom, rgba(127,169,146,0.50) 0%, rgba(127,169,146,0.45) 65%, rgba(11,17,33,0.80) 100%)
+          `
+        }}
+      />
+
+      {/* Technical Grid */}
+      <div className="absolute inset-0 z-20 pointer-events-none">
+        {/* Vertical line at 50% */}
+        <div className="grid-line absolute left-1/2 top-0 bottom-0 w-px bg-white/[0.08] origin-center" />
+        {/* Horizontal line at 62% */}
+        <div className="grid-line absolute top-[62%] left-0 right-0 h-px bg-white/[0.08] origin-center" />
+        {/* Crosshair at intersection */}
+        <div className="crosshair absolute z-30" style={{ left: 'calc(50% - 10px)', top: 'calc(62% - 10px)' }}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth="1">
+            <line x1="10" y1="0" x2="10" y2="20" />
+            <line x1="0" y1="10" x2="20" y2="10" />
+          </svg>
         </div>
+      </div>
+
+      {/* Text Content */}
+      <div className="absolute inset-0 z-30 flex flex-col justify-between px-[20px] py-[20px]">
+
+        {/* Upper-left block ~50% down */}
+        <div className="mt-[50svh] md:mt-[45svh]">
+          <div className="overflow-hidden">
+            <div className="hero-reveal text-[12px] md:text-[13px] uppercase tracking-[0.08em] text-white/80 font-light leading-relaxed max-w-[280px] md:max-w-[320px]">
+              <span className="text-brand-primary mr-1.5">/</span>
+              DESIGNED FOR THE CASPIAN SEA — SATELLITE AND AI OIL SPILL INTELLIGENCE.
+            </div>
+          </div>
+        </div>
+
+        {/* Right-aligned block, below crosshair */}
+        <div className="absolute right-[20px] top-[66%] text-right">
+          <div className="overflow-hidden">
+            <div className="hero-reveal text-[13px] uppercase tracking-[0.08em] text-white/70 font-light leading-relaxed">
+              AI ADVISES.<br />
+              HUMANS DECIDE.
+            </div>
+          </div>
+        </div>
+
+        {/* Spacer */}
+        <div className="flex-grow" />
+
+        {/* Bottom headline */}
+        <div className="mb-[90px] md:mb-[100px]">
+          <div className="overflow-hidden">
+            <h1 className="hero-reveal text-[clamp(2.75rem,13vw,4.5rem)] md:text-[clamp(3rem,6vw,5rem)] font-bold uppercase leading-[0.92] tracking-tighter">
+              <span className="text-white block">ENGINEERED</span>
+              <span className="text-brand-primary/70 block">TO RESPOND</span>
+            </h1>
+          </div>
+        </div>
+
       </div>
     </section>
   );

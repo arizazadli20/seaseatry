@@ -36,22 +36,27 @@ export function Navigation() {
 
   return (
     <>
-      <nav className={`sticky top-0 z-50 w-full transition-colors ${scrolled ? 'border-b border-gray-200 bg-white md:bg-white/95 md:backdrop-blur-md' : 'border-b border-transparent bg-white md:bg-transparent'}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
+        scrolled 
+          ? 'bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm' 
+          : 'bg-transparent border-b border-transparent'
+      }`}>
         <div className="w-full px-[20px] md:px-6 h-[56px] md:h-20 flex items-center justify-between max-w-7xl mx-auto">
           
           <div className="flex items-center gap-3">
             {/* Logo Icon */}
-            <div className="w-8 h-8 md:w-10 md:h-10 shrink-0 rounded-full bg-brand-light flex items-center justify-center text-brand-primary relative overflow-hidden">
+            <div className={`w-8 h-8 md:w-10 md:h-10 shrink-0 rounded-full flex items-center justify-center relative overflow-hidden transition-colors duration-300 ${
+              scrolled ? 'bg-brand-light text-brand-primary' : 'bg-white/15 text-white'
+            }`}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="absolute top-1.5 md:top-2 w-[16px] h-[16px] md:w-[20px] md:h-[20px]"><path d="m14.5 12 4-4"/><path d="m19 8-1.5-1.5"/><path d="m11 5-1.5-1.5"/><path d="m5 11-1.5-1.5"/><path d="m8 19-1.5-1.5"/><path d="m12 14.5-4 4"/><circle cx="12" cy="12" r="2.5"/><path d="m15.5 15.5 1.5 1.5"/><path d="m18 18 .5.5"/></svg>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="absolute bottom-0.5 md:bottom-1 text-[#4B5563] w-[20px] h-[20px] md:w-[24px] md:h-[24px]"><path d="M2 12h20"/><path d="M4 15h16"/><path d="M6 18h12"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className={`absolute bottom-0.5 md:bottom-1 w-[20px] h-[20px] md:w-[24px] md:h-[24px] transition-colors duration-300 ${scrolled ? 'text-[#4B5563]' : 'text-white/60'}`}><path d="M2 12h20"/><path d="M4 15h16"/><path d="M6 18h12"/></svg>
             </div>
             
             <div className="flex flex-col justify-center">
-              <span className="text-lg md:text-xl font-bold text-gray-900 tracking-tight leading-none">
+              <span className={`text-lg md:text-xl font-bold tracking-tight leading-none transition-colors duration-300 ${
+                scrolled ? 'text-gray-900' : 'text-white'
+              }`}>
                 {siteCopy.global.name}
-              </span>
-              <span className="hidden md:block text-[13px] font-medium text-gray-500 mt-1">
-                {siteCopy.global.tagline}
               </span>
             </div>
           </div>
@@ -59,7 +64,9 @@ export function Navigation() {
           <div className="flex items-center gap-4">
             {/* Hamburger Menu Toggle (Mobile) */}
             <button 
-              className="md:hidden flex items-center justify-center w-11 h-11 -mr-2 text-gray-900"
+              className={`md:hidden flex items-center justify-center w-11 h-11 -mr-2 transition-colors duration-300 ${
+                scrolled ? 'text-gray-900' : 'text-white'
+              }`}
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Toggle menu"
             >
@@ -73,7 +80,7 @@ export function Navigation() {
             {/* Desktop CTA */}
             <div className="hidden md:block">
               <Button href={siteCopy.global.demoUrl} variant="primary" className="px-6 py-2 shadow-sm">
-                {siteCopy.hero.primaryCta}
+                Explore Platform
               </Button>
             </div>
           </div>
@@ -82,13 +89,13 @@ export function Navigation() {
 
       {/* Mobile Full-Screen Menu */}
       {menuOpen && (
-        <div className="md:hidden fixed inset-0 top-[56px] z-40 bg-white h-[calc(100vh-56px)] overflow-y-auto">
+        <div className="md:hidden fixed inset-0 top-[56px] z-40 bg-[#0B1121] h-[calc(100vh-56px)] overflow-y-auto">
           <div className="flex flex-col px-[20px] py-8 gap-6">
             {navLinks.map((link) => (
               <a 
                 key={link.label}
                 href={link.href}
-                className="text-[24px] font-medium text-gray-900 block min-h-[44px] flex items-center"
+                className="text-[24px] font-medium text-white block min-h-[44px] flex items-center"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}
