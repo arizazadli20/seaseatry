@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { siteCopy } from '../../content/copy';
@@ -6,7 +6,40 @@ import { siteCopy } from '../../content/copy';
 export function Problem() {
   const containerRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(true);
+
+  // Check for reduced motion / save-data / slow connection
+  useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const conn = (navigator as any).connection;
+    const saveData = conn?.saveData;
+    const slowConnection = conn?.effectiveType === '2g' || conn?.effectiveType === '3g';
+
+    if (prefersReduced || saveData || slowConnection) {
+      setShouldLoadVideo(false);
+    }
+  }, []);
+
+  // Pause video when off-screen
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !shouldLoadVideo) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [shouldLoadVideo]);
 
   useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -46,7 +79,7 @@ export function Problem() {
     }
 
     // Image Parallax (0.85x speed means it moves 15% relative to scroll)
-    gsap.to(imageRef.current, {
+    gsap.to(videoContainerRef.current, {
       yPercent: 15,
       ease: 'none',
       scrollTrigger: {
@@ -64,16 +97,30 @@ export function Problem() {
       <div className="w-full px-[20px] max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
-          {/* Image Tile (Parallax) */}
+          {/* Video Tile (Parallax) */}
           <div className="order-2 lg:order-1 h-[300px] lg:h-[500px] rounded-[28px] overflow-hidden relative bg-gray-900 border border-white/10 -mx-[20px] lg:mx-0 pr-[20px] lg:pr-0 pl-[20px] lg:pl-0">
-             <div ref={imageRef} className="absolute -top-[15%] -bottom-[15%] left-0 right-0 bg-gray-800 bg-cover bg-center" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #1a2436 0%, #0B1121 100%)' }}>
-               {/* Abstract placeholder for the tile */}
-               <div className="absolute inset-0 opacity-30 flex items-center justify-center">
-                 <svg viewBox="0 0 100 100" className="w-full h-full" stroke="rgba(255,255,255,0.1)" strokeWidth="0.5" fill="none">
-                    <circle cx="50" cy="50" r="20" />
-                    <circle cx="50" cy="50" r="40" />
-                 </svg>
-               </div>
+             <div ref={videoContainerRef} className="absolute -top-[15%] -bottom-[15%] left-0 right-0 bg-gray-800">
+               {shouldLoadVideo ? (
+                 <video
+                   ref={videoRef}
+                   autoPlay
+                   muted
+                   loop
+                   playsInline
+                   preload="metadata"
+                   poster="/lab-poster.jpg"
+                   className="w-full h-full object-cover object-center opacity-80"
+                 >
+                   <source src="/lab.webm" type="video/webm" />
+                   <source src="/lab.mp4" type="video/mp4" />
+                 </video>
+               ) : (
+                 <img
+                   src="/lab-poster.jpg"
+                   alt="Laboratory testing of sorbents"
+                   className="w-full h-full object-cover object-center opacity-80"
+                 />
+               )}
              </div>
           </div>
 
