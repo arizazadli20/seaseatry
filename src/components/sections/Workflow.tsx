@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { siteCopy } from '../../content/copy';
 
@@ -46,22 +47,31 @@ export function Workflow() {
 
     // Mobile Auto-scroll hint
     if (window.innerWidth < 768 && scrollContainerRef.current) {
-      // Wait for the intro animation to finish, then slowly auto-scroll to the right
-      gsap.to(scrollContainerRef.current, {
-        scrollLeft: 800, // Scroll enough to show the next steps
-        duration: 15,
-        ease: 'none',
-        delay: 2.5,
-        scrollTrigger: {
-          trigger: scrollContainerRef.current,
-          start: 'top 80%',
+      const container = scrollContainerRef.current;
+      let scrollTimer: ReturnType<typeof setInterval>;
+      
+      const stopScroll = () => {
+        if (scrollTimer) clearInterval(scrollTimer);
+      };
+
+      gsap.registerPlugin(ScrollTrigger);
+      ScrollTrigger.create({
+        trigger: containerRef.current,
+        start: 'top 50%',
+        once: true,
+        onEnter: () => {
+          scrollTimer = setInterval(() => {
+            if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
+              stopScroll();
+            } else {
+              container.scrollBy({ left: window.innerWidth * 0.8, behavior: 'smooth' });
+            }
+          }, 2500);
         }
       });
       
-      // Stop auto-scrolling if the user touches the container
-      const stopScroll = () => gsap.killTweensOf(scrollContainerRef.current);
-      scrollContainerRef.current.addEventListener('touchstart', stopScroll, { once: true });
-      scrollContainerRef.current.addEventListener('mousedown', stopScroll, { once: true });
+      container.addEventListener('touchstart', stopScroll, { once: true });
+      container.addEventListener('mousedown', stopScroll, { once: true });
     }
   }, { scope: containerRef });
 
@@ -80,7 +90,7 @@ export function Workflow() {
         </div>
 
         {/* Timeline Container */}
-        <div className="relative">
+        <div className="relative overflow-hidden md:overflow-visible">
           {/* Desktop Connecting Line (Hidden on mobile) */}
           <div className="hidden md:block absolute top-[28px] left-[28px] right-[28px] h-[2px] bg-gray-200 timeline-track z-0"></div>
 
@@ -89,11 +99,13 @@ export function Workflow() {
             ref={scrollContainerRef}
             className="flex md:grid md:grid-cols-5 gap-6 md:gap-4 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory scrollbar-none -mx-[20px] px-[20px] md:mx-0 md:px-0"
           >
-            {/* Mobile connecting line (only visible on mobile, moves with scroll) */}
-            <div className="md:hidden absolute top-[28px] left-[20px] h-[2px] bg-gray-200 z-0 timeline-track" style={{ width: '400vw' }}></div>
-
-            {siteCopy.workflow.steps.map((step) => (
+            {siteCopy.workflow.steps.map((step, idx) => (
               <div key={step.id} className="relative z-10 flex flex-col shrink-0 w-[85vw] sm:w-[50vw] md:w-auto snap-center md:snap-align-none">
+                
+                {/* Mobile connecting line */}
+                {idx !== siteCopy.workflow.steps.length - 1 && (
+                  <div className="md:hidden absolute top-[27px] left-[56px] h-[2px] bg-gray-200 z-[-1] timeline-track" style={{ width: 'calc(100% + 24px - 56px)' }}></div>
+                )}
                 
                 {/* Node Circle */}
                 <div 
