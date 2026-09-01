@@ -18,7 +18,7 @@ export function Navigation() {
           ? 'bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm' 
           : 'bg-transparent border-b border-transparent'
       }`}>
-        <div className="w-full px-[20px] md:px-6 h-[56px] md:h-20 flex items-center justify-between max-w-7xl mx-auto">
+        <div className="w-full px-[20px] md:px-6 h-[56px] md:h-20 flex items-center justify-center max-w-7xl mx-auto">
           
           <div className="flex items-center">
             {/* Full Logo */}
