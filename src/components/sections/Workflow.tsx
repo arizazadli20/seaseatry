@@ -43,6 +43,26 @@ export function Workflow() {
         0.3
       );
     }
+
+    // Mobile Auto-scroll hint
+    if (window.innerWidth < 768 && scrollContainerRef.current) {
+      // Wait for the intro animation to finish, then slowly auto-scroll to the right
+      gsap.to(scrollContainerRef.current, {
+        scrollLeft: 800, // Scroll enough to show the next steps
+        duration: 15,
+        ease: 'none',
+        delay: 2.5,
+        scrollTrigger: {
+          trigger: scrollContainerRef.current,
+          start: 'top 80%',
+        }
+      });
+      
+      // Stop auto-scrolling if the user touches the container
+      const stopScroll = () => gsap.killTweensOf(scrollContainerRef.current);
+      scrollContainerRef.current.addEventListener('touchstart', stopScroll, { once: true });
+      scrollContainerRef.current.addEventListener('mousedown', stopScroll, { once: true });
+    }
   }, { scope: containerRef });
 
   return (
