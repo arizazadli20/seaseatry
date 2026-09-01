@@ -100,17 +100,33 @@ export function CaspianContext() {
              </div>
           </div>
           
-          <div className="order-1 lg:order-2 relative aspect-[4/3] w-full bg-gray-50 rounded-[28px] overflow-hidden -mx-[20px] lg:mx-0 pr-[20px] lg:pr-0 pl-[20px] lg:pl-0 flex items-center justify-center border border-gray-100">
-            <svg ref={svgRef} viewBox="0 0 400 600" className="w-full h-full opacity-60" fill="none" stroke="currentColor">
+          <div className="order-1 lg:order-2 relative aspect-[4/3] w-full bg-gray-900 rounded-[28px] overflow-hidden -mx-[20px] lg:mx-0 pr-[20px] lg:pr-0 pl-[20px] lg:pl-0 flex items-center justify-center border border-gray-100 shadow-xl">
+            {/* Background Video */}
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster="/hero-poster.jpg"
+              className="absolute inset-0 w-full h-full object-cover opacity-60"
+              style={{ filter: 'saturate(0) brightness(0.8) contrast(1.2)' }}
+            >
+              <source src="/hero.webm" type="video/webm" />
+              <source src="/hero.mp4" type="video/mp4" />
+            </video>
+            
+            {/* SVG Overlay */}
+            <svg ref={svgRef} viewBox="0 0 400 600" className="w-full h-full opacity-80 relative z-10 drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" fill="none" stroke="currentColor">
               <path 
                 className="coastline"
                 d="M150,50 Q180,80 190,120 T210,180 Q230,220 220,260 T190,320 Q160,380 180,450 T200,520 Q220,550 250,540 T300,500 Q320,450 300,400 T270,330 Q250,280 280,240 T310,180 Q320,120 280,80 T200,40 Z" 
-                stroke="#1E2A40" strokeWidth="1.5" fill="#F9FAFB" 
+                stroke="#FFFFFF" strokeWidth="2" strokeDasharray="5,5" fill="rgba(255,255,255,0.05)" 
               />
-              <circle className="marker" cx="210" cy="180" r="4" fill="#00E5FF" />
+              <circle className="marker drop-shadow-[0_0_8px_#00E5FF]" cx="210" cy="180" r="6" fill="#00E5FF" />
             </svg>
-            <div className="absolute bottom-6 left-6 text-[13px] font-mono text-gray-500 uppercase tracking-widest">
-              VECTOR RENDERING
+            <div className="absolute bottom-6 left-6 text-[13px] font-mono text-white/70 uppercase tracking-widest z-20 bg-black/40 px-3 py-1.5 rounded backdrop-blur-sm border border-white/10">
+              SATELLITE INTEL
             </div>
           </div>
 
