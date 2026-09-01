@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { siteCopy } from '../../content/copy';
@@ -6,6 +6,39 @@ import { siteCopy } from '../../content/copy';
 export function LivePlatform() {
   const containerRef = useRef<HTMLElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(true);
+
+  // Check for reduced motion / save-data / slow connection
+  useEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const conn = (navigator as any).connection;
+    const saveData = conn?.saveData;
+    const slowConnection = conn?.effectiveType === '2g' || conn?.effectiveType === '3g';
+
+    if (prefersReduced || saveData || slowConnection) {
+      setShouldLoadVideo(false);
+    }
+  }, []);
+
+  // Pause video when off-screen
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !shouldLoadVideo) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [shouldLoadVideo]);
 
   useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -37,12 +70,45 @@ export function LivePlatform() {
           {siteCopy.livePlatform.title}
         </h3>
 
-        <div ref={frameRef} className="max-w-4xl mx-auto rounded-[28px] border-[8px] border-gray-900 bg-gray-900 shadow-2xl overflow-hidden aspect-[4/3] md:aspect-[16/9] relative flex items-center justify-center">
-           <div className="absolute inset-0 bg-[#0B1121] flex flex-col items-center justify-center text-white/50">
-             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="mb-4"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-             <span className="text-sm font-mono tracking-widest uppercase">Dashboard Interface Preview</span>
-           </div>
-        </div>
+        <a 
+          href={siteCopy.global.demoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block group"
+          aria-label="Open Dashboard Demo"
+        >
+          <div ref={frameRef} className="max-w-4xl mx-auto rounded-[28px] border-[8px] border-gray-900 bg-gray-900 shadow-2xl overflow-hidden aspect-[4/3] md:aspect-[16/9] relative flex items-center justify-center transition-transform duration-300 group-hover:scale-[1.02] group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
+             <div className="absolute inset-0 bg-[#0B1121]">
+               {shouldLoadVideo ? (
+                 <video
+                   ref={videoRef}
+                   autoPlay
+                   muted
+                   loop
+                   playsInline
+                   preload="metadata"
+                   poster="/dashboard-poster.jpg"
+                   className="w-full h-full object-cover object-center"
+                 >
+                   <source src="/dashboard.webm" type="video/webm" />
+                   <source src="/dashboard.mp4" type="video/mp4" />
+                 </video>
+               ) : (
+                 <img
+                   src="/dashboard-poster.jpg"
+                   alt="Dashboard Interface Preview"
+                   className="w-full h-full object-cover object-center"
+                 />
+               )}
+               {/* Play/External Link Overlay Icon on Hover */}
+               <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                 <div className="w-16 h-16 rounded-full bg-brand-primary text-white flex items-center justify-center transform scale-90 group-hover:scale-100 transition-transform duration-300">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                 </div>
+               </div>
+             </div>
+          </div>
+        </a>
       </div>
     </section>
   );
