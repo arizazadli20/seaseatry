@@ -9,7 +9,7 @@ export function Footer() {
         <div className="flex flex-col lg:flex-row justify-between gap-16 lg:gap-8 mb-24">
           
           {/* Left Column - Logo & Tagline */}
-          <div className="flex flex-col justify-between lg:w-1/3">
+          <div className="flex flex-col justify-between lg:w-1/3 items-center lg:items-start text-center lg:text-left">
             <div className="mb-12 lg:mb-0">
               <div className="h-10 inline-block mb-8">
                 <img 
@@ -27,7 +27,7 @@ export function Footer() {
           </div>
 
           {/* Right Columns - Links */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-12 lg:w-2/3 lg:pl-16">
+          <div className="flex flex-col lg:grid lg:grid-cols-3 gap-12 lg:w-2/3 lg:pl-16 text-center lg:text-left">
             
             {/* Column 1 */}
             <div>
@@ -50,7 +50,7 @@ export function Footer() {
             </div>
 
             {/* Column 3 */}
-            <div className="col-span-2 md:col-span-1">
+            <div>
               <h4 className="text-[12px] text-gray-500 font-medium tracking-wide mb-6 uppercase">Contact Us</h4>
               <ul className="space-y-4">
                 <li className="text-[13px] text-white font-medium leading-relaxed uppercase">

@@ -100,7 +100,7 @@ export function CaspianContext() {
              </div>
           </div>
           
-          <div className="order-1 lg:order-2 relative aspect-[4/3] w-full bg-gray-900 rounded-[28px] overflow-hidden -mx-[20px] lg:mx-0 pr-[20px] lg:pr-0 pl-[20px] lg:pl-0 flex items-center justify-center border border-gray-100 shadow-xl">
+          <div className="order-1 lg:order-2 relative aspect-video lg:aspect-[4/3] w-full bg-gray-900 rounded-2xl lg:rounded-[28px] overflow-hidden flex items-center justify-center border border-gray-100 shadow-xl">
             {/* Background Video */}
             <video
               autoPlay
