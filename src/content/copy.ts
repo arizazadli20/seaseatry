@@ -73,8 +73,8 @@ export const siteCopy = {
     }
   },
   problem: {
-    title: "The missing link",
-    description: "Detection is only the beginning. The harder challenge is coordinating a fast, informed response."
+    title: "The science of recovery",
+    description: "Detection is only the first step. Our laboratory engineers advanced sorbent materials designed to physically isolate, treat, and recycle oil."
   },
   response: {
     title: "Response Statuses",
