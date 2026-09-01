@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { siteCopy } from '../../content/copy';
 
@@ -43,35 +42,6 @@ export function Workflow() {
         { y: 0, opacity: 1, duration: 0.6, stagger: 0.15, ease: 'power2.out' },
         0.3
       );
-    }
-
-    // Mobile Auto-scroll hint
-    if (window.innerWidth < 768 && scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      let scrollTimer: ReturnType<typeof setInterval>;
-      
-      const stopScroll = () => {
-        if (scrollTimer) clearInterval(scrollTimer);
-      };
-
-      gsap.registerPlugin(ScrollTrigger);
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: 'top 50%',
-        once: true,
-        onEnter: () => {
-          scrollTimer = setInterval(() => {
-            if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
-              stopScroll();
-            } else {
-              container.scrollBy({ left: window.innerWidth * 0.8, behavior: 'smooth' });
-            }
-          }, 2500);
-        }
-      });
-      
-      container.addEventListener('touchstart', stopScroll, { once: true });
-      container.addEventListener('mousedown', stopScroll, { once: true });
     }
   }, { scope: containerRef });
 
