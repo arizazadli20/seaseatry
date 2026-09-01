@@ -54,15 +54,23 @@ export function SnapCarousel({ children, desktopGridClassName, autoAdvance = fal
     return () => observer.disconnect();
   }, [children.length]);
 
-  // Auto-advance logic (4s interval)
+  // Auto-advance logic
   useEffect(() => {
-    if (!autoAdvance || userInteracted || !isVisible) return;
+    if (!autoAdvance || !isVisible) return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
     const container = scrollContainerRef.current;
     if (!container) return;
+
+    // If user interacted, don't auto-advance for 5 seconds, then resume
+    if (userInteracted) {
+      const resumeTimeout = setTimeout(() => {
+        setUserInteracted(false);
+      }, 5000);
+      return () => clearTimeout(resumeTimeout);
+    }
 
     const intervalId = setInterval(() => {
       // Apply on mobile & tablet (below 1024px)
@@ -81,7 +89,7 @@ export function SnapCarousel({ children, desktopGridClassName, autoAdvance = fal
           behavior: 'smooth'
         });
       }
-    }, 4000);
+    }, 2500); // Faster interval for a more dynamic feel
 
     return () => clearInterval(intervalId);
   }, [autoAdvance, userInteracted, activeIndex, isVisible]);
