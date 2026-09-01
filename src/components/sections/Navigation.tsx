@@ -43,20 +43,17 @@ export function Navigation() {
       }`}>
         <div className="w-full px-[20px] md:px-6 h-[56px] md:h-20 flex items-center justify-between max-w-7xl mx-auto">
           
-          <div className="flex items-center gap-3 md:gap-4">
-            {/* Logo Icon */}
-            <div className={`w-10 h-10 md:w-14 md:h-14 shrink-0 rounded-full flex items-center justify-center relative overflow-hidden transition-all duration-300 ${
-              !scrolled && 'shadow-[0_0_15px_rgba(255,255,255,0.15)]'
+          <div className="flex items-center">
+            {/* Full Logo */}
+            <div className={`h-12 md:h-14 relative overflow-hidden transition-all duration-300 ${
+              !scrolled ? 'opacity-90' : 'opacity-100'
             }`}>
-              <img src="/logo-mark.jpg" alt="SeaSentry Logo" className="w-full h-full object-cover bg-white scale-[1.05]" />
-            </div>
-            
-            <div className="flex flex-col justify-center">
-              <span className={`text-lg md:text-xl font-bold tracking-tight leading-none transition-colors duration-300 ${
-                scrolled ? 'text-gray-900' : 'text-white'
-              }`}>
-                {siteCopy.global.name}
-              </span>
+              <img 
+                src="/logo.jpeg" 
+                alt="SeaSentry Logo" 
+                className={`h-full w-auto object-contain transition-all duration-300 ${scrolled ? 'mix-blend-multiply' : 'mix-blend-screen'}`} 
+                style={!scrolled ? { filter: 'invert(1) grayscale(1) brightness(2)' } : {}} 
+              />
             </div>
           </div>
 
