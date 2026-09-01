@@ -11,6 +11,7 @@ import { Response } from './components/sections/Response';
 import { Team } from './components/sections/Team';
 import { FinalCta } from './components/sections/FinalCta';
 import { Footer } from './components/sections/Footer';
+import { Mission } from './components/sections/Mission';
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -46,6 +47,7 @@ function App() {
         <Navigation />
         <main className="relative z-10 bg-white">
           <Hero />
+          <Mission />
           <Problem />
           <Workflow />
           <AiAdvises />
